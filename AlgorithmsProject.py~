@@ -1,0 +1,50 @@
+#!/usr/bin/env python3
+
+#Rabin Karp, 
+def search(pat, txt, q):
+    n = len(pat)
+    m = len(txt)
+    i = 0
+    j = 0
+    p = 0	# hash value for pattern
+    t = 0	# hash value for txt
+    h = 1
+    # d is the size of the character set (26? 128? 256?)
+    # q is used for modulo, generally a prime number
+  
+    # The value of h would be "pow(d, n-1)%q"
+    for i in xrange(n-1):
+        h = (h*d)%q
+  
+    # Calculate the hash value of pattern and first window of text
+    for i in xrange(n):
+        p = (d*p + ord(pat[i]))%q
+        t = (d*t + ord(txt[i]))%q
+        
+ # Slide the pattern over text one by one
+    for i in xrange(m-n+1):
+        # Compare hash of current window in text with that of pattern; if match, do one by one 
+        if p==t:
+            # Check for characters one by one
+            for j in xrange(n):
+                if txt[i+j] != pat[j]:
+                    break
+            j+=1
+            # if p == t and pat[0...n-1] = txt[i, i+1, ...i+n-1]
+            if j==n:
+                print "Pattern found at index " + str(i)
+  
+        # Calculate hash value for next window of text: Remove leading digit, add trailing digit
+        if i < n-m:
+            t = (d*(t-ord(txt[i])*h) + ord(txt[i+n]))%q
+            # We might get negative values of t, converting it to positive
+            if t < 0:
+                t = t+q
+
+
+def main():
+    # Driver program to test the above function 
+    txt = "GEEKS FOR GEEKS"
+    pat = "GEEK"
+    q = 101 # A prime number 
+    search(pat,txt,q)
