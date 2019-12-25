@@ -139,10 +139,10 @@ def KMPSearch(pat, txt):
 
 def main():
     #Set up test data
-    pat_list1 = ['art']
-    pat_list2 = ['daysandyears']
-    pat_list3 = ['greatcity']
-    pat_list4 = ['art', 'daysandyears', 'greatcity', 'heavenward']
+    pat_list1 = ['art', 'thebeg', 'cret', 'ans', 'andthe', 'the', 'ear', 'thy', 'inni', 'in']
+    pat_list2 = ['daysandyears', 'luminary', 'lightup', 'yield', 'andfor', 'founded', 'appoint', 'andtheyshallbeforsigns', 'toseparatebetween', 'torah']
+    pat_list3 = ['greatcity', 'lesha', 'masterofthesoil', 'youshallnoteat', 'accordingly', 'scatterplot', 'thesearethegenerations', 'befruitfulandmultiply', 'establishmycovenant', 'therainbowshallbeintheclouds']
+    pat_list4 = ['heavenward', 'greatcity', 'daysandyears', 'art', 'scatterplot', 'torah', 'andfor', 'iwillmakeyouexceedinglyfruitful', 'abrahamwascircumcised', 'thelandthatiwillshowyou']
     text_files = [('./10_words.txt', pat_list1), ('./100_words.txt', pat_list2), ('./1000_words.txt', pat_list3), ('./10000_words.txt', pat_list4)]
     ans1 = 0
     ans2 = 0
