@@ -1,4 +1,28 @@
 #!/usr/bin/env python3
+import re
+
+def clean_text(filename):
+    # open file and read text                                                                                                                             
+    f = open(filename)
+    text = f.readlines()
+
+    # convert text to lowercase letters 
+    lowerCaseString = text[0].lower()
+
+    # remove anything that is not a letter
+    newString = ""
+    pattern = "[a-z]"
+
+    for c in lowerCaseString:
+        if re.match(pattern, c):
+            newString += c
+
+    count = len(newString)
+
+    print("The name of the file is", filename)
+    print("The number of characters our file contains:", count)
+
+    return newString
 
 #Rabin Karp, https://www.geeksforgeeks.org/rabin-karp-algorithm-for-pattern-searching/
 def search(pat, txt, q):
@@ -50,7 +74,7 @@ def search(pat, txt, q):
             if t < 0:
                 t = t+q
                 
-    return count_n, count_m, count_m * count_n
+    return count_m * count_n
 
 #Knuth-Morris-Pratt, https://www.geeksforgeeks.org/kmp-algorithm-for-pattern-searching/
 def computeLPSArray(pat, n, lps):
@@ -108,18 +132,30 @@ def KMPSearch(pat, txt):
     return count_n + count_m
 
 def main():
-    # Driver program to test Rabin-Karp 
-    txt = "GEEKS FOR GEEKS"
-    pat = "GEEK"
-    q = 101 # A prime number
-    ans = 0
-    ans = search(pat,txt,q)
-    print("The number of comparisons is", ans)
+    
+    text_files = [('./10_words.txt', 1), ('./100_words.txt', 2), ('./1000_words.txt', 3), ('./10000_words.txt', 4)]
+    pat_list1 = ['art']
+    pat_list2 = ['daysandyears']
+    pat_list3 = ['greatcity']
+    pat_list4 = ['art', 'daysandyears', 'greatcity', 'heavenward']
+    ans1 = 0
+    ans2 = 0
 
-    # Driver program to test Knuth-Morris Pratt
-    txt = "ABABDABACDABABCABAB"
-    pat = "ABABCABAB"
-    ans = KMPSearch(pat, txt)
-    print("The number of comparisons is", ans)
+    for File in text_files:
+        print("")
+        print("The file we are on is", File)
+        
+        # Driver program to test Rabin-Karp 
+        txt = clean_text(File[0])
+        pat = "pat_list" + str(File[1])
+        q = 101 # A prime number
+        for pattern in pat:
+            print("The pattern is", pattern)
+            ans1 = search(pattern, txt, q)
+            print("The number of comparisons RK is", ans1)
+
+            # Driver program to test Knuth-Morris Pratt
+            ans2 = KMPSearch(pattern, txt)
+            print("The number of comparisons KMP is", ans2)
 
 main()
