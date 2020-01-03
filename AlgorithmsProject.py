@@ -2,7 +2,7 @@
 import re
 
 def clean_text(filename):
-    # open file and read text                                                                                                                             
+    # open file and read text
     f = open(filename)
     text = f.readlines()
 
@@ -11,7 +11,7 @@ def clean_text(filename):
 
     # remove anything that is not a letter
     newString = ""
-    pattern = "[a-z]"
+    pattern = "[^\.\?\!\[\]\s\d\"\' ]"
 
     for c in lowerCaseString:
         if re.match(pattern, c):
